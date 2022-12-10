@@ -10,6 +10,7 @@ function App() {
     "자바스크립트 책 추천",
   ]);
   let [좋아요, 좋아요변경] = useState(0);
+  let [modal, setModal] = useState(false);
 
   function 함수() {
     console.log(1);
@@ -49,10 +50,16 @@ function App() {
         <p>12월 17일 발행</p>
       </div>
       <div className="list">
-        <h4>{글제목[2]}</h4>
+        <h4
+          onClick={() => {
+            setModal(true);
+          }}
+        >
+          {글제목[2]}
+        </h4>
         <p>12월 17일 발행</p>
       </div>
-      <Modal></Modal>
+      {modal == true ? <Modal /> : null}
     </div>
   );
 }
