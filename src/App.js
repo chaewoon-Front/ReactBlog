@@ -9,7 +9,7 @@ function App() {
     "성수 카페 추천",
     "자바스크립트 책 추천",
   ]);
-  let [좋아요, 좋아요변경] = useState(0);
+  let [좋아요, 좋아요변경] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
 
   function 함수() {
@@ -21,7 +21,7 @@ function App() {
         <h4>ReactBlog</h4>
       </div>
 
-      <button
+      {/* <button
         onClick={() => {
           let copy = [...글제목];
           copy[0] = "여자코트 추천";
@@ -29,9 +29,9 @@ function App() {
         }}
       >
         글수정
-      </button>
+      </button> */}
 
-      <div className="list">
+      {/* <div className="list">
         <h4>
           {글제목[0]}
           <span
@@ -40,7 +40,7 @@ function App() {
             }}
           >
             👍
-          </span>{" "}
+          </span>
           {좋아요}
         </h4>
         <p>12월 17일 발행</p>
@@ -52,24 +52,61 @@ function App() {
       <div className="list">
         <h4
           onClick={() => {
-            setModal(true);
+            setModal(!modal);
           }}
         >
           {글제목[2]}
         </h4>
         <p>12월 17일 발행</p>
-      </div>
-      {modal == true ? <Modal /> : null}
+      </div> */}
+
+      {[1, 2, 3].map(function (a, i) {
+        return (
+          <div className="list" key={i}>
+            <h4
+              onClick={() => {
+                setModal(true);
+              }}
+            >
+              {글제목[i]}
+              <span
+                onClick={() => {
+                  let copy = [...좋아요];
+                  copy[i] = copy[i] + 1;
+                  좋아요변경(copy);
+                }}
+              >
+                👍
+              </span>
+              {좋아요[i]}
+            </h4>
+            <p>12월 17일 발행</p>
+          </div>
+        );
+      })}
+
+      {modal == true ? <Modal 글제목변경={글제목변경} 글제목={글제목} /> : null}
     </div>
   );
 }
 
-function Modal() {
+function Modal(props) {
   return (
     <div className="modal">
-      <h4>제목</h4>
+      <h4>{props.글제목[0]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button
+        onClick={() => {
+          props.글제목변경([
+            "여자 코트 추천",
+            "성수 카페 추천",
+            "자바스크립트 책 추천",
+          ]);
+        }}
+      >
+        글 수정
+      </button>
     </div>
   );
 }
