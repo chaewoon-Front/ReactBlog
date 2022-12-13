@@ -68,14 +68,18 @@ function Modal(props) {
       >
         글 수정
       </button>
-      <input type="text" />
-      <input type="range" />
-      <input type="date" />
-      <input type="number" />
-      <textarea></textarea>
-      <select></select>
     </div>
   );
+}
+
+class Modal2 extends React.Component {
+  constructor() {
+    super();
+  }
+
+  render() {
+    return <div>안녕</div>;
+  }
 }
 
 export default App;
